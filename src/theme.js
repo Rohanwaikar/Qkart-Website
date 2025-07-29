@@ -1,6 +1,6 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles"; // Importing createTheme from Material-UI to create a custom theme
 
-const theme = createTheme({
+const theme = createTheme({ // Creating a custom theme
   typography: {
     fontFamily: "Lato"
   },
@@ -14,4 +14,4 @@ const theme = createTheme({
   },
 });
 
-export default theme;
+export default theme; // Exporting the custom theme for use in the application

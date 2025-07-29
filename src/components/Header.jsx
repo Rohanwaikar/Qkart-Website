@@ -3,48 +3,46 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useState, useEffect } from "react";
 
-const Header = ({ children, hasHiddenAuthButtons = false }) => {
+const Header = ({ children, hasHiddenAuthButtons = false }) => { // Header component that displays the application header with navigation and authentication buttons
 
-const [username, setUsername] = useState("");
-const [token, setToken] = useState("");
-const [balance, setBalance] = useState("");
+const [username, setUsername] = useState(""); // State to manage the username
+const [token, setToken] = useState(""); // State to manage the authentication token
 
 
-   const navigate = useNavigate();
-  const location = useLocation();
-  
+
+   const navigate = useNavigate(); // useNavigate hook from react-router-dom to navigate to different routes
+  const location = useLocation(); // useLocation hook to get the current location (route) of the application
    useEffect(() => {
-    const u = localStorage.getItem("username");
-    const t = localStorage.getItem("token");
-    const b = localStorage.getItem("balance");
+    const u = localStorage.getItem("username"); // Fetch username from localStorage
+    const t = localStorage.getItem("token"); // Fetch token from localStorage
+    
 
-    setUsername(u && u !== "undefined" ? u : "");
-    setToken(t && t !== "undefined" ? t : "");
-    setBalance(b && b !== "undefined" ? b : "");
+    setUsername(u && u !== "undefined" ? u : ""); // Set username state, defaulting to empty string if not found or undefined
+    setToken(t && t !== "undefined" ? t : ""); // Set token state, defaulting to empty string if not found or undefined
+    
 
 
-    console.log("🔁 Header useEffect: Fetched from localStorage", {
+    console.log("🔁 Header useEffect: Fetched from localStorage", { 
     username: u,
     token: t,
-    balance: b
+    
   });
 
   }, [location]); // Re-run on route change (like after login)
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
-    localStorage.removeItem("balance");
+  const handleLogout = () => { // Function to handle user logout
+    localStorage.removeItem("token"); // Remove token from localStorage
+    localStorage.removeItem("username");   // Remove username from localStorage
 
-    setUsername("");
-    setToken("");
-    setBalance("");
-    navigate("/login");
+    setUsername(""); // Clear username state
+    setToken(""); // Clear token state
+     
+    navigate("/login"); // Navigate to the login page after logout
   };
 
 
   return (
-    <Box
+    <Box // Main container for the header
       className="header"
       sx={{
         display: "flex",
@@ -55,18 +53,18 @@ const [balance, setBalance] = useState("");
         color: "white",
       }}
     >
-      <Box className="header-title">
+      <Box className="header-title"> {/* Title section of the header */}
         <Link to="/">
           <img src="logo_light.svg" alt="Logo" height="40" />
         </Link>
       </Box>
-      {!hasHiddenAuthButtons && username && token ? (
-        <Stack direction="row" spacing={1} alignItems="center">
-          <Avatar alt={username} src="./avatar.jpg" />
-          <p style={{ margin: 0 }}>{ username}</p>
-          <button onClick={handleLogout}>Logout</button>
+      {!hasHiddenAuthButtons && username && token ? (  // If the user is authenticated, display the username and logout button
+        <Stack direction="row" spacing={1} alignItems="center"> { /* Stack to arrange items horizontally with spacing */}
+          <Avatar alt={username} src="./avatar.jpg" /> {/* Avatar to display user's profile picture */}
+          <p style={{ margin: 0 }}>{ username}</p> {/* Display the username */}
+          <button onClick={handleLogout}>Logout</button> {/* Logout button that calls handleLogout function on click */}
         </Stack>
-      ) : !hasHiddenAuthButtons ? (
+      ) : !hasHiddenAuthButtons ? ( // If the user is not authenticated and hasHiddenAuthButtons is false, display login and register buttons
         <Stack direction="row" spacing={2}>
           <Link to="/login">
             <Button variant="contained" color="primary">
@@ -84,4 +82,4 @@ const [balance, setBalance] = useState("");
   );
 };
 
-export default Header;
+export default Header; // Exporting the Header component as the default export of this module

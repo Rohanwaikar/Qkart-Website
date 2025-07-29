@@ -1,9 +1,9 @@
 import { Box } from '@mui/material';
 import "./Footer.css";
 
-const Footer = () => {
+const Footer = () => { // Footer component that displays the footer section of the application
     return(
-        <Box className="footer">
+        <Box className="footer"> {/* Main container for the footer */}
             <Box>
                 <img src="logo_dark.svg" alt="QKart-icon" />
             </Box>

@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 
 
-const Cart = ({ items = [], onUpdateQuantity }) => {
-  const navigate = useNavigate();
-  if (!items.length)
+const Cart = ({ items = [], onUpdateQuantity }) => { // Cart component that displays items in the cart and allows quantity updates
+  const navigate = useNavigate(); // useNavigate hook from react-router-dom to navigate to different routes
+  if (!items.length) // If there are no items in the cart, display an empty cart message
     return (
       <Box className="cart empty" textAlign="center">
         <ShoppingCartOutlined
@@ -23,16 +23,16 @@ const Cart = ({ items = [], onUpdateQuantity }) => {
 
   return (
     <Box className="cart" sx={{ padding: 1, backgroundColor: "#fff", borderRadius: 2 }}>
-      <h2>Your Cart</h2>
-      {items.map((item) => (
-        <Box key={item["_id"]} sx={{ marginBottom: 2, padding: 1, borderBottom: "1px solid #ddd" }}>
+      <h2>Your Cart</h2>  
+      {items.map((item) => ( // Map through each item in the cart and display its details
+        <Box key={item["_id"]} sx={{ marginBottom: 2, padding: 1, borderBottom: "1px solid #ddd" }}>  
           <Box display="flex" justifyContent="space-between" alignItems="center">
             <Box display="flex" alignItems="center" gap={2}>
               <img style={{ width: "40px", height: "40px", objectFit: "cover", borderRadius: "4px" }} src={item.image} alt={item.name} />
               <p>{item.name}</p>
             </Box>
             <Box display="flex" alignItems="center">
-              <Button onClick={() => onUpdateQuantity(item["_id"], (item.quantity || 1) - 1)}>-</Button>
+              <Button onClick={() => onUpdateQuantity(item["_id"], (item.quantity || 1) - 1)}>-</Button> 
 
               <span style={{ margin: "0 0.1px" }}>
                 {item.quantity || 1}
@@ -61,4 +61,4 @@ const Cart = ({ items = [], onUpdateQuantity }) => {
   // Full cart view (not implemented in this example)
 };
 
-export default Cart;
+export default Cart; // Exporting the Cart component to be used in other parts of the application

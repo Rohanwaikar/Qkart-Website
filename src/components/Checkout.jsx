@@ -6,38 +6,38 @@ import { useState } from 'react';
 import { getTotalCartValue } from '../components/Products'
 
 
-const Checkout = () => {
+const Checkout = () => { // Checkout component that handles the checkout process for the user
 
-    const [addresses, setAddresses] = useState({ all: [], selected: "" });
-    let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    const [newAddress, setNewAddress] = useState({
-        isAddingNewAddress: false,
-        value: "",
+    const [addresses, setAddresses] = useState({ all: [], selected: "" }); // State to manage addresses, with an array for all addresses and a selected address
+    let cartItems = JSON.parse(localStorage.getItem("cartItems")) || []; // Retrieve cart items from local storage or initialize as an empty array
+    const [newAddress, setNewAddress] = useState({ // State to manage the new address being added
+        isAddingNewAddress: false, // Flag to indicate if a new address is being added
+        value: "", // The value of the new address input field
     });
 
-    const addAddress = () => {
-        if (newAddress.value) {
-            setAddresses((prev) => ({
-                ...prev,
-                all: [...prev.all, { id: Date.now(), name: newAddress.value }],
+    const addAddress = () => { // Function to add a new address
+        if (newAddress.value) { // Check if the new address value is not empty
+            setAddresses((prev) => ({ // Update the addresses state by adding the new address
+                ...prev, // Spread the previous state
+                all: [...prev.all, { id: Date.now(), name: newAddress.value }], // Add the new address with a unique ID based on the current timestamp
             }));
-            setNewAddress({ isAddingNewAddress: false, value: "" });
+            setNewAddress({ isAddingNewAddress: false, value: "" }); // Reset the new address state after adding
         }
     };
 
-    const handlePlaceOrder = () => {
-        if (addresses.selected) {
-            alert(`Order placed successfully to ${addresses.selected.name}`);
+    const handlePlaceOrder = () => { // Function to handle placing the order
+        if (addresses.selected) { // Check if an address is selected
+            alert(`Order placed successfully to ${addresses.selected.name}`); // Alert the user that the order has been placed successfully
             // Here you can add logic to handle order placement, e.g., API call
         }
     };
 
-    const handleAddAddress = (e) => {
-        setNewAddress({ ...newAddress, value: e.target.value });
+    const handleAddAddress = (e) => { // Function to handle changes in the new address input field
+        setNewAddress({ ...newAddress, value: e.target.value }); // Update the new address value based on user input
 
     };
-    const handleSelectAddress = (address) => {
-        setAddresses((prev) => ({ ...prev, selected: address }));
+    const handleSelectAddress = (address) => { // Function to handle selecting an address
+        setAddresses((prev) => ({ ...prev, selected: address })); // Update the addresses state to set the selected address
     };
 
   return (

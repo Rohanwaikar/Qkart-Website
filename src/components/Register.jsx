@@ -42,13 +42,6 @@ const Register = () => { // Register component for user registration
                 });
                 navigate('/login');
 
-            
-
-            if (response.ok) {
-                console.log('Registration successful');
-            } else {
-                console.error('Registration failed:', response.statusText);
-            }
         } catch (error) {
             console.error('Error occurred during registration:', error);
         }
@@ -61,8 +54,8 @@ const Register = () => { // Register component for user registration
             return; // Exit the function if passwords do not match
         }
         Register({ // Call the Register function with form data
-            username: formData.username, // Send username
-            password: formData.password, // Send password
+            username: formData.username, // Send username as parameter
+            password: formData.password, // Send password as parameter
         });
     };
 

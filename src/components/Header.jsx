@@ -58,6 +58,12 @@ const [token, setToken] = useState(""); // State to manage the authentication to
           <img src="logo_light.svg" alt="Logo" height="40" />
         </Link>
       </Box>
+      {children && (
+        <Box width={"30vw"}> {/* Container for any children components passed to the Header component */}
+          {children} {/* Render children components, such as search bar or other elements */}
+        </Box>
+      ) }
+
       {!hasHiddenAuthButtons && username && token ? (  // If the user is authenticated, display the username and logout button
         <Stack direction="row" spacing={1} alignItems="center"> { /* Stack to arrange items horizontally with spacing */}
           <Avatar alt={username} src="./avatar.jpg" /> {/* Avatar to display user's profile picture */}
